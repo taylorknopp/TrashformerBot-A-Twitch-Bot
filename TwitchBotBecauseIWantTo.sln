@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchBotBecauseIWantTo", "TwitchBotBecauseIWantTo\TwitchBotBecauseIWantTo.csproj", "{263AE79C-A930-4528-AD3B-034DC2536FA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{263AE79C-A930-4528-AD3B-034DC2536FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{263AE79C-A930-4528-AD3B-034DC2536FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{263AE79C-A930-4528-AD3B-034DC2536FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{263AE79C-A930-4528-AD3B-034DC2536FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {470B3B5C-B991-4D8B-AD95-1A255416FABE}
+	EndGlobalSection
+EndGlobal
