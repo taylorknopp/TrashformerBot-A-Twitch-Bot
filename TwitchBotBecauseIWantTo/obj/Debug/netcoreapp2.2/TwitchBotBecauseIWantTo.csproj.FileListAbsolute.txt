@@ -1,0 +1,11 @@
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\bin\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.deps.json
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\bin\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.runtimeconfig.json
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\bin\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.runtimeconfig.dev.json
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\bin\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.dll
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\bin\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.pdb
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\obj\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.csprojAssemblyReference.cache
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\obj\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.csproj.CoreCompileInputs.cache
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\obj\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.AssemblyInfoInputs.cache
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\obj\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.AssemblyInfo.cs
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\obj\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.dll
+C:\Users\taylo\Source\Repos\TwtichBotForFun\Twitch-Bot-For-Fun\TwitchBotBecauseIWantTo\obj\Debug\netcoreapp2.2\TwitchBotBecauseIWantTo.pdb
