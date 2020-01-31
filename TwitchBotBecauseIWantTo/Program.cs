@@ -5,6 +5,8 @@ using TwitchLib.Client.Events;
 using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 
+
+
 namespace TwitchBotBecauseIWantTo
 {
     class Program
@@ -12,6 +14,7 @@ namespace TwitchBotBecauseIWantTo
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Bot bot = new Bot(); ;
         }
     }
     class Bot

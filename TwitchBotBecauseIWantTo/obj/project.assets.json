@@ -3938,7 +3938,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "TwitchLib >= 3.1.0"
+      "TwitchLib >= 3.1.0",
+      "TwitchLib.Client >= 3.1.4"
     ]
   },
   "packageFolders": {
@@ -3991,6 +3992,10 @@
           "TwitchLib": {
             "target": "Package",
             "version": "[3.1.0, )"
+          },
+          "TwitchLib.Client": {
+            "target": "Package",
+            "version": "[3.1.4, )"
           }
         },
         "imports": [
