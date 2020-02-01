@@ -1,0 +1,11 @@
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.csprojAssemblyReference.cache
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.csproj.CoreCompileInputs.cache
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.AssemblyInfoInputs.cache
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.AssemblyInfo.cs
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/bin/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.deps.json
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/bin/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.runtimeconfig.json
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/bin/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.runtimeconfig.dev.json
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/bin/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.dll
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/bin/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.pdb
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.dll
+/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/Debug/netcoreapp2.1/TwitchBotBecauseIWantTo.pdb

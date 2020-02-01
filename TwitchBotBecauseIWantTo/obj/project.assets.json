@@ -3455,12 +3455,11 @@
       ]
     },
     "System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "vOYy7Jv9KsG3ld2hLt0GoERd82SZi4BelrbXLwI9yFBYX7kpbvUCWYo4eyevk47cuJXZ9ZLVAryANcc7iY71aA==",
+      "sha512": "h4CEgOgv5PKVF/HwaHzJRiVboL2THYCou97zpmhjghx5frc7fIvlkY1jL+lnIQyChrJDMNEXS6r7byGif8Cy4w==",
       "type": "package",
       "path": "system.security.cryptography.openssl/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.6/System.Security.Cryptography.OpenSsl.dll",
@@ -3944,30 +3943,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\taylo\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/home/taylor/.nuget/packages/": {},
+    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
+      "projectUniqueName": "/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/TwitchBotBecauseIWantTo.csproj",
       "projectName": "TwitchBotBecauseIWantTo",
-      "projectPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
-      "packagesPath": "C:\\Users\\taylo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\obj\\",
+      "projectPath": "/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/TwitchBotBecauseIWantTo.csproj",
+      "packagesPath": "/home/taylor/.nuget/packages/",
+      "outputPath": "/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\taylo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/taylor/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3985,6 +3982,7 @@
       "netcoreapp2.1": {
         "dependencies": {
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true

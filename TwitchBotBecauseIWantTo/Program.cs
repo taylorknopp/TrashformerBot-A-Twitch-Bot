@@ -17,7 +17,8 @@ namespace TwitchBotBecauseIWantTo
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Bot bot = new Bot("Channel"); ;
+            Bot bot = new Bot("trash_productions");
+            Console.ReadKey();
         }
     }
     class Bot
@@ -56,18 +57,16 @@ namespace TwitchBotBecauseIWantTo
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
             Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
+            client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.Channel).FirstOrDefault(), "Hey guys! I am a bot connected via TwitchLib!");
 
         }
 
-        private async void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
+        private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
             if (e.ChatMessage.Message.Contains("!dadJoke"))
             {
-                
 
-
-
-                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), "JOKE: " + joke);
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), "JOKE: ");
             }
 
         }
