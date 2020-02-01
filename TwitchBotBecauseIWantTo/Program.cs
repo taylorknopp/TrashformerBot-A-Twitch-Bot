@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
-
+using System.Net.WebSockets;
+using TwitchLib.Communication.Clients;
+using TwitchLib.Communication.Interfaces;
 
 
 namespace TwitchBotBecauseIWantTo
@@ -14,31 +17,28 @@ namespace TwitchBotBecauseIWantTo
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Bot bot = new Bot(); ;
+            Bot bot = new Bot("Channel"); ;
         }
     }
     class Bot
     {
         TwitchClient client;
 
-        public Bot()
+        public Bot(string channel)
         {
-            ConnectionCredentials credentials = new ConnectionCredentials("twitch_username", "access_token");
-            var clientOptions = new ClientOptions()
-            {
-                MessagesAllowedInPeriod = 750,
-                ThrottlingPeriod = TimeSpan.FromSeconds(30)
-            };
-            WebSocketClient customClient = new WebSocketClient(clientOptions);
+            ConnectionCredentials credentials = new ConnectionCredentials("TestBot9000", "icv5lkqilemaedchp1ucxz0ytsc9dk");
+
+            WebSocketClient customClient = new WebSocketClient();
             client = new TwitchClient(customClient);
-            client.Initialize(credentials, "channel");
+            client.Initialize(credentials, channel);
 
             client.OnLog += Client_OnLog;
             client.OnJoinedChannel += Client_OnJoinedChannel;
             client.OnMessageReceived += Client_OnMessageReceived;
-            client.OnWhisperReceived += Client_OnWhisperReceived;
-            client.OnNewSubscriber += Client_OnNewSubscriber;
+            //client.OnWhisperReceived += Client_OnWhisperReceived;
+            //client.OnNewSubscriber += Client_OnNewSubscriber;
             client.OnConnected += Client_OnConnected;
+
 
             client.Connect();
         }
@@ -56,13 +56,20 @@ namespace TwitchBotBecauseIWantTo
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
             Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
-            client.SendMessage(e.Channel, "Hey guys! I am a bot connected via TwitchLib!");
+
         }
 
-        private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
+        private async void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
-            if (e.ChatMessage.Message.Contains("badword"))
-                client.TimeoutUser(e.ChatMessage.Channel, e.ChatMessage.Username, TimeSpan.FromMinutes(30), "Bad word! 30 minute timeout!");
+            if (e.ChatMessage.Message.Contains("!dadJoke"))
+            {
+                
+
+
+
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), "JOKE: " + joke);
+            }
+
         }
 
         private void Client_OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
@@ -80,4 +87,4 @@ namespace TwitchBotBecauseIWantTo
         }
     }
 }
-}
+
