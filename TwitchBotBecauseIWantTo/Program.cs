@@ -198,7 +198,7 @@ namespace TwitchBotBecauseIWantTo
                     string keyOfCounterToReset = Console.ReadLine();
                     int index = -1;
                     Int32.TryParse(keyOfCounterToReset, out index);
-                    if(index >= 0)
+                    if (index >= 0 && index < CTs.Count())
                     {
                         counter ctToClear = CTs[index];
                         ctToClear.count = 0;
@@ -209,6 +209,7 @@ namespace TwitchBotBecauseIWantTo
                     {
                         Console.Clear();
                         Console.WriteLine("Invalid Choice");
+                        Thread.Sleep(1500);
                     }
 
                 }
