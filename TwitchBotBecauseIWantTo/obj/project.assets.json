@@ -2,6 +2,24 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "CSCore/1.2.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net35-client/CSCore.dll": {}
+        },
+        "runtime": {
+          "lib/net35-client/CSCore.dll": {}
+        }
+      },
+      "LiteDB/5.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -1168,6 +1186,38 @@
     }
   },
   "libraries": {
+    "CSCore/1.2.1.2": {
+      "sha512": "DoQKUcdZLQawo3mOg8CvujJD9YkvTt6NtEu7S+OCo8+ySl8eCeUw4LFyL2E1OcAkPU918HZM6sUNcvIMcXWg6g==",
+      "type": "package",
+      "path": "cscore/1.2.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cscore.1.2.1.2.nupkg.sha512",
+        "cscore.nuspec",
+        "lib/net35-client/CSCore.XML",
+        "lib/net35-client/CSCore.dll"
+      ]
+    },
+    "LiteDB/5.0.1": {
+      "sha512": "ZeKNn6Am9SpuavNqHw2Aj5kUm/Wg1MymjanFBcBI2M//MKe2DvQpeiqXtyHjvhLplwnITpHWys9TFGnrbpKBWg==",
+      "type": "package",
+      "path": "litedb/5.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "icon_64x64.png",
+        "lib/net45/LiteDB.dll",
+        "lib/net45/LiteDB.xml",
+        "lib/netstandard1.3/LiteDB.dll",
+        "lib/netstandard1.3/LiteDB.xml",
+        "lib/netstandard2.0/LiteDB.dll",
+        "lib/netstandard2.0/LiteDB.xml",
+        "litedb.5.0.1.nupkg.sha512",
+        "litedb.nuspec"
+      ]
+    },
     "Microsoft.CSharp/4.5.0": {
       "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
       "type": "package",
@@ -3455,11 +3505,12 @@
       ]
     },
     "System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "h4CEgOgv5PKVF/HwaHzJRiVboL2THYCou97zpmhjghx5frc7fIvlkY1jL+lnIQyChrJDMNEXS6r7byGif8Cy4w==",
+      "sha512": "vOYy7Jv9KsG3ld2hLt0GoERd82SZi4BelrbXLwI9yFBYX7kpbvUCWYo4eyevk47cuJXZ9ZLVAryANcc7iY71aA==",
       "type": "package",
       "path": "system.security.cryptography.openssl/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.6/System.Security.Cryptography.OpenSsl.dll",
@@ -3938,33 +3989,37 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "CSCore >= 1.2.1.2",
+      "LiteDB >= 5.0.1",
       "Microsoft.NETCore.App >= 2.1.0",
       "TwitchLib >= 3.1.0"
     ]
   },
   "packageFolders": {
-    "/home/taylor/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\taylo\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/TwitchBotBecauseIWantTo.csproj",
+      "projectUniqueName": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
       "projectName": "TwitchBotBecauseIWantTo",
-      "projectPath": "/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/TwitchBotBecauseIWantTo.csproj",
-      "packagesPath": "/home/taylor/.nuget/packages/",
-      "outputPath": "/home/taylor/Twitch-Bot-For-Fun/TwitchBotBecauseIWantTo/obj/",
+      "projectPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
+      "packagesPath": "C:\\Users\\taylo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/taylor/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\taylo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3981,6 +4036,14 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "CSCore": {
+            "target": "Package",
+            "version": "[1.2.1.2, )"
+          },
+          "LiteDB": {
+            "target": "Package",
+            "version": "[5.0.1, )"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -3993,11 +4056,29 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100-preview8-013656\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'CSCore 1.2.1.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
+      "libraryId": "CSCore",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    }
+  ]
 }

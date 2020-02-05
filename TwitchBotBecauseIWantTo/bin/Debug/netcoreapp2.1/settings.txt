@@ -1,0 +1,5 @@
+Cahnnel Name = trash_productions
+Token = oauth:x64c6vsc9pfxnajwp16slxhusuiy9e
+Username = Test
+$sfx: !test,E:\Stream Assets\Tone.wav
+$counter: !yawn
