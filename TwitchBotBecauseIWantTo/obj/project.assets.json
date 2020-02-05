@@ -4000,10 +4000,10 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "0.1.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
-      "projectName": "TwitchBotBecauseIWantTo",
+      "projectName": "TrashformerBot",
       "projectPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
       "packagesPath": "C:\\Users\\taylo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\obj\\",

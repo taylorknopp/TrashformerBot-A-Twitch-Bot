@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "TwitchBotBecauseIWantTo/1.0.0": {
+      "TwitchBotBecauseIWantTo/0.1.0": {
         "dependencies": {
           "CSCore": "1.2.1.2",
           "LiteDB": "5.0.1",
@@ -565,7 +565,7 @@
     }
   },
   "libraries": {
-    "TwitchBotBecauseIWantTo/1.0.0": {
+    "TwitchBotBecauseIWantTo/0.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

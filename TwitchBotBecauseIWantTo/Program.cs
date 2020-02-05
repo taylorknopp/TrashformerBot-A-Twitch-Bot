@@ -47,10 +47,40 @@ namespace TwitchBotBecauseIWantTo
 
             var settingsFile = File.ReadAllLines(settingsPath);
             var settingsList = new List<string>(settingsFile);
+            string channel = null;
+            string token;
+            string username;
+            try
+            {
+                channel = settingsList[0].Split('=')[1].Replace(" ", "");
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No Channel Specified");
+                Console.ReadKey();
+                Environment.Exit(0);
 
-            string channel = settingsList[0].Split('=')[1].Replace(" ", "");
-            string token = settingsList[1].Split('=')[1].Replace(" ","");
-            string username = settingsList[2].Split('=')[1].Replace(" ", "");
+            }
+            try
+            {
+                token = settingsList[1].Split('=')[1].Replace(" ", "");
+            }
+            catch
+            {
+                token = "oauth:x64c6vsc9pfxnajwp16slxhusuiy9e";
+            }
+            try
+            {
+                username = settingsList[2].Split('=')[1].Replace(" ", "");
+            }
+            catch
+            {
+                username = "TrashformerBot";
+            }
+           
+            
+            
             int numCommands = 0;
             int numSfx = 0;
             int numCounters = 0;
@@ -80,14 +110,54 @@ namespace TwitchBotBecauseIWantTo
                 }
                 if(line.Contains("$counter:"))
                 {
-                    string cmd = line.Split("$counter:")[1].Replace(" ", "");
+                    List<string> parts = line.Split("$counter:")[1].Split(",").ToList();
                     List<counter> CTs = countersColection.FindAll().ToList();
+                    string cmd = parts[0].Replace(" ", "");
+                    string partA = "";
+                    string partB = "";
+                    try
+                    {
+                        partA = parts[1];
+                    }
+                    catch
+                    {
+
+                    }
+
+                    try
+                    {
+                        partB = parts[2];
+                    }
+                    catch
+                    {
+
+                    }
+                    if(partA == "" && partB == "")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Malformed Counter In Config: " + cmd + " On Line: " + settingsList.IndexOf(line).ToString());
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
                     if(CTs.Where(counter => counter.commandString == cmd).Count() <= 0)
                     {
                         counter ct = new counter();
                         ct.commandString = cmd;
+                        ct.textPartA = partA;
+                        ct.textPartB = partB;
                         
                         countersColection.Insert(ct);
+                    }
+                    else
+                    {
+                        counter ct = CTs.Where(counter => counter.commandString == cmd).FirstOrDefault();
+                        if(ct.textPartA != partA || ct.textPartB != partB)
+                        {
+                            ct.textPartA = partA;
+                            ct.textPartB = partB;
+                            countersColection.Update(ct);
+                        }
+                        
+
                     }
                     countCommands.Add(cmd);
                     
@@ -107,7 +177,50 @@ namespace TwitchBotBecauseIWantTo
             Console.ReadKey();
 
             Bot bot = new Bot(channel,token,username,commands, SFX, countersColection,countCommands);
-            Console.ReadKey();
+            while(true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("----Menu----");
+                Console.WriteLine("1. Reset Counter");
+                Console.WriteLine("2. Exit");
+                ConsoleKey key = Console.ReadKey().Key;
+                Console.Clear();
+                if(key == ConsoleKey.D1)
+                {
+                    Console.WriteLine("Chose What Counter To Reset");
+                    List < counter > CTs = countersColection.FindAll().ToList();
+                    foreach(counter ct in CTs)
+                    {
+                        Console.WriteLine(CTs.IndexOf(ct).ToString() + ". " + ct.commandString);
+                    }
+                    Console.WriteLine("Type the number Of the counter you want to reset and hit enter: ");
+                    string keyOfCounterToReset = Console.ReadLine();
+                    int index = -1;
+                    Int32.TryParse(keyOfCounterToReset, out index);
+                    if(index >= 0)
+                    {
+                        counter ctToClear = CTs[index];
+                        ctToClear.count = 0;
+                        countersColection.Update(ctToClear);
+
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid Choice");
+                    }
+
+                }
+                if(key == ConsoleKey.D2)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Shutting Down...");
+                    Thread.Sleep(2500);
+                    Environment.Exit(0);
+                }
+            }
+           
                 
 
 
@@ -147,17 +260,17 @@ namespace TwitchBotBecauseIWantTo
 
         private void Client_OnLog(object sender, OnLogArgs e)
         {
-            Console.WriteLine($"{e.DateTime.ToString()}: {e.BotUsername} - {e.Data}");
+            //Console.WriteLine($"{e.DateTime.ToString()}: {e.BotUsername} - {e.Data}");
         }
 
         private void Client_OnConnected(object sender, OnConnectedArgs e)
         {
-            Console.WriteLine($"Connected to {e.AutoJoinChannel}");
+            //Console.WriteLine($"Connected to {e.AutoJoinChannel}");
         }
 
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
-            Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
+            //Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
             //client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.Channel).FirstOrDefault(), "Hey guys! I am a bot connected via TwitchLib!");
 
         }
@@ -185,9 +298,9 @@ namespace TwitchBotBecauseIWantTo
                 {
                     List<counter> CTs = counters.FindAll().ToList();
                     counter ctOBJ = CTs.Where(counter => message.Contains(counter.commandString)).FirstOrDefault();
-                    int count = ctOBJ.increment();
+                    string count = ctOBJ.increment().ToString();
                     counters.Update(ctOBJ);
-                    client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), count.ToString());
+                    client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), ctOBJ.textPartA + " " + count  + " " + ctOBJ.textPartB);
                 }
             }
             if (e.ChatMessage.Message.Contains("!dadJoke"))
@@ -261,16 +374,7 @@ namespace TwitchBotBecauseIWantTo
             _soundOut.Play();
 
         }
-        private void SetupSampleSource(ISampleSource aSampleSource)
-        {
-            
-            //create a spectrum provider which provides fft data based on some input
-           
-
-            //the SingleBlockNotificationStream is used to intercept the played samples
-           
-
-        }
+       
 
 
     }
@@ -278,16 +382,13 @@ namespace TwitchBotBecauseIWantTo
     {
         public int _id { get; set; }
         public int count { get; set; }
+        public string textPartA { get; set; }
+        public string textPartB { get; set; }
         public string commandString { get; set; }
 
 
 
-        /*public counter(string cmd, LiteDB.ILiteCollection<counter> cnts)
-        {
-            countersColection = cnts;
-            commandString = cmd;
-           
-        }*/
+        
         public int increment()
         {
 

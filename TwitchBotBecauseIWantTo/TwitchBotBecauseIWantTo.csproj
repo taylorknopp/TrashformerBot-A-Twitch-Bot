@@ -3,6 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>Taylor Knopp</Authors>
+    <Company>N/A</Company>
+    <Product>Trashformer Bot</Product>
+    <PackageId>TrashformerBot</PackageId>
+    <Description>A Dsicord Bot</Description>
   </PropertyGroup>
 
   <ItemGroup>
