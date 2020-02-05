@@ -4002,11 +4002,11 @@
   "project": {
     "version": "0.1.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
+      "projectUniqueName": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
       "projectName": "TrashformerBot",
-      "projectPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
+      "projectPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
       "packagesPath": "C:\\Users\\taylo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\Twitch-Bot-For-Fun\\TwitchBotBecauseIWantTo\\obj\\",
+      "outputPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
