@@ -1,2 +1,2 @@
-# Twitch Bot For Fun
+# TrashfromerBot
  A Twitch Bot Just Becuase I Can
