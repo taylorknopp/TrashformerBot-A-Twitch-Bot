@@ -3,7 +3,7 @@ Current Features:
 
     Sound Effects - Custom sounds to be played by your viewers or by mods wIth custom commands for each sound.
     Counters - Custom commands to count stream events such as deaths, yawns, or sneezes.
-    Basic Commands - Custom commands with custom text responses  such as !social printing out social media info, or !schedule printing a link   to your schedule.
+    Basic Commands - Custom commands with custom text responses  such as !social printing out social media info, or !schedule printing a link to your schedule.
 
 Features in development
 
@@ -12,7 +12,8 @@ Features in development
 
 Planned Features
 
-     Currently no specific features are planned but you can request some here:  https://forms.gle/UmNmbdu4bk3XMGmLA
+
+     Currently no specific features are planned but you can request some here: [Bot Feature Submition Form](https://forms.gle/UmNmbdu4bk3XMGmLA)  
 
 Setup Guide
 
