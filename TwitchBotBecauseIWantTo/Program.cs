@@ -30,7 +30,7 @@ namespace TwitchBotBecauseIWantTo
         LiteEngine LiteEngine = new LiteEngine();
         static LiteDB.LiteDatabase db = new LiteDatabase(Directory.GetCurrentDirectory() + @"\counters.db");
         static LiteDB.ILiteCollection<counter> countersColection = db.GetCollection<counter>("counters");
-        static List<string> lines = new List<string>() { "Cahnnel Name = ", "Token = ", "Username = " };
+        static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = " };
         static List<string> countCommands = new List<string>();
         public static List<command> commands = new List<command>();
         public static List<sfx> SFX = new List<sfx>();
@@ -50,6 +50,15 @@ namespace TwitchBotBecauseIWantTo
             string channel = null;
             string token;
             string username;
+            bool requireMod = true;
+            try
+            {
+                bool.TryParse(settingsList[3].Split("=")[1],out requireMod);
+            }
+            catch
+            {
+
+            }
             try
             {
                 channel = settingsList[0].Split('=')[1].Replace(" ", "");
@@ -57,10 +66,17 @@ namespace TwitchBotBecauseIWantTo
             catch
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("No Channel Specified");
+                Console.WriteLine("No Channel Specified - Press any key to continue");
                 Console.ReadKey();
                 Environment.Exit(0);
 
+            }
+            if(channel.Length <= 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No Channel Specified - Press any key to continue");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
             try
             {
@@ -171,12 +187,13 @@ namespace TwitchBotBecauseIWantTo
             Console.WriteLine(numCommands + " Commands Loaded");
             Console.WriteLine(numSfx + " SFX Loaded");
             Console.WriteLine(numCounters + " Counters Loaded");
+            Console.WriteLine("Commands Require Moderator Status Is Set To: " + requireMod);
             Console.WriteLine("--Press Any Key To Continue--");
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey();
 
-            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection,countCommands);
+            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection,countCommands,requireMod);
             while(true)
             {
                 Console.Clear();
@@ -235,13 +252,15 @@ namespace TwitchBotBecauseIWantTo
         public List<sfx> sfxes;
         public LiteDB.ILiteCollection<counter> counters;
         public List<string> countersList;
+        public bool requireMod = true;
          
-        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, List<string> ctList)
+        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, List<string> ctList, bool requireModBool)
         {
             countersList = ctList;
             counters = countersCol;
             commands = commandList;
             sfxes = sfxList;
+            requireMod = requireModBool;
             ConnectionCredentials credentials = new ConnectionCredentials("TrashformerBot", "oauth:x64c6vsc9pfxnajwp16slxhusuiy9e");
 
             WebSocketClient customClient = new WebSocketClient();
@@ -278,6 +297,12 @@ namespace TwitchBotBecauseIWantTo
 
         private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
+            bool isMod = e.ChatMessage.IsModerator || e.ChatMessage.IsBroadcaster;
+            bool continueOrStopBecasueNotMod = !requireMod || (requireMod && isMod);
+            if(!continueOrStopBecasueNotMod)
+            {
+                return;
+            }
             string message = e.ChatMessage.Message;
             foreach (command cmd in commands)
             {

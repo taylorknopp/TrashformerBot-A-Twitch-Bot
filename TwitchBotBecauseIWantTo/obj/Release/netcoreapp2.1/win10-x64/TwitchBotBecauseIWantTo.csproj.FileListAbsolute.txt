@@ -1,0 +1,13 @@
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\hostpolicy.dll
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\hostfxr.dll
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.exe
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.deps.json
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.runtimeconfig.json
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.runtimeconfig.dev.json
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.dll
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\bin\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.pdb
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\obj\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.csprojAssemblyReference.cache
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\obj\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.AssemblyInfoInputs.cache
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\obj\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.AssemblyInfo.cs
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\obj\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.dll
+C:\Users\taylo\Source\Repos\TwtichBotForFun\TrashformerBot\TwitchBotBecauseIWantTo\obj\Release\netcoreapp2.1\win10-x64\TwitchBotBecauseIWantTo.pdb

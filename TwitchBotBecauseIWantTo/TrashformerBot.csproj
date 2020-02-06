@@ -8,7 +8,8 @@
     <Company>N/A</Company>
     <Product>Trashformer Bot</Product>
     <PackageId>TrashformerBot</PackageId>
-    <Description>A Dsicord Bot</Description>
+    <Description>A Twitch Bot</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

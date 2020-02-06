@@ -4002,9 +4002,9 @@
   "project": {
     "version": "0.1.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
+      "projectUniqueName": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\TrashformerBot.csproj",
       "projectName": "TrashformerBot",
-      "projectPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\TwitchBotBecauseIWantTo.csproj",
+      "projectPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\TrashformerBot.csproj",
       "packagesPath": "C:\\Users\\taylo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\taylo\\Source\\Repos\\TwtichBotForFun\\TrashformerBot\\TwitchBotBecauseIWantTo\\obj\\",
       "projectStyle": "PackageReference",
