@@ -5,26 +5,25 @@ Current Features:
     Counters - Custom commands to count stream events such as deaths, yawns, or sneezes.
     Basic Commands - Custom commands with custom text responses  such as !social printing out social media info, or !schedule printing a link to your schedule.
 
-Features in development
+## Features in development
 
     Currently no features are in development as I am concentrating on 
     Bug fixes with the base bot and it’s three starting features.
 
-Planned Features
+## Planned Features
 
-
-     Currently no specific features are planned but you can request some here:[Bot Feature Request](https://forms.gle/12LwgnkpPPTFqica7) 
+   Currently no specific features are planned but you can request some here, [Bot Feature Request](https://forms.gle/12LwgnkpPPTFqica7 "Google Forms") 
      
-Setup Guide
+## Setup Guide
 
-     The latest release of the bot can be downloaded from the release section of this repo, here: ![#releases]
+   The latest release of the bot can be downloaded from the release section of this repo, here, [Releases](https://github.com/taylorknopp/TrashformerBot-A-Twitch-Bot/releases "Releases")
 
      After downloading the bot extract it to your location of choice.
      In the netcoreapp2.1 folder you will find TrashfomerBot.exe,
      this is the   bot executable.  Running the bot for the first time will 
      generate the configuration file for you to fill out, settings.txt.
 
-Example Configuration
+## Example Configuration
 
     Channel Name = <Name of the channel to connect to, aka your twitch display name>
     Token = <oauth Token, leave blank for default>
