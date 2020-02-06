@@ -13,8 +13,8 @@ Features in development
 Planned Features
 
 
-     Currently no specific features are planned but you can request some here: [Bot Feature Submition Form](https://forms.gle/UmNmbdu4bk3XMGmLA)  
-
+     Currently no specific features are planned but you can request some here: <a href="http://recordit.co/" target="_blank">**Recordit**</a>
+     
 Setup Guide
 
      The latest release of the bot can be downloaded from the release section of this repo, here: 
