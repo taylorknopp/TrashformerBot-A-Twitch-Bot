@@ -13,7 +13,7 @@ Features in development
 Planned Features
 
 
-     Currently no specific features are planned but you can request some here: 
+     Currently no specific features are planned but you can request some here:[Bot Feature Request](https://forms.gle/12LwgnkpPPTFqica7) 
      
 Setup Guide
 
