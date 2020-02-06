@@ -1,3 +1,2 @@
-\TwitchBotBecauseIWantTo\bin\Release\
-*.bin
-*.obj
+\TwitchBotBecauseIWantTo\bin\
+\TwitchBotBecauseIWantTo\obj\
