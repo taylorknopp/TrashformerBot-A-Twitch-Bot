@@ -1,3 +1,0 @@
-Cahnnel Name = 
-Token = 
-Username = 

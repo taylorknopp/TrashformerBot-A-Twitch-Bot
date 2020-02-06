@@ -1,7 +1,0 @@
-Cahnnel Name = trash_productions
-Token = <oauth Token, leave blank for default>
-Username = <Username, Curently semas to do nothign but Twitchlib requires it, leave blank for default>
-RequireModForCommands = <True Or False>
-$command: !twit,<link to your twitter here>
-$sfx: !bong,<Path to your audio file, .wav preferably>
-$counter:  !count,<Text to come before the number>,<Text to come after the number>
