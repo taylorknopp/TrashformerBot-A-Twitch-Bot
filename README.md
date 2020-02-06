@@ -13,11 +13,11 @@ Features in development
 Planned Features
 
 
-     Currently no specific features are planned but you can request some here: <a href="http://recordit.co/" target="_blank">**Recordit**</a>
+     Currently no specific features are planned but you can request some here: 
      
 Setup Guide
 
-     The latest release of the bot can be downloaded from the release section of this repo, here: 
+     The latest release of the bot can be downloaded from the release section of this repo, here: ![#releases]
 
      After downloading the bot extract it to your location of choice.
      In the netcoreapp2.1 folder you will find TrashfomerBot.exe,
