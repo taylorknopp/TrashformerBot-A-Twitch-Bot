@@ -32,3 +32,8 @@ Current Features:
     $command: !twit,<link to your twitter here>
     $sfx: !bong,<Path to your audio file, .wav preferably>
     $counter:  !count,<Text to come before the number>,<Text to come after the number>
+    
+## Default Account
+   The default account the bot will use is TrashformerBot on Twitch
+   
+   Default Account Logo Art by [AllTheseVertices](https://www.twitch.tv/allthesevertices "AllTheseVertices On Twitch")
