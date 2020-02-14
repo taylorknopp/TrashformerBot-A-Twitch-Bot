@@ -269,7 +269,15 @@ namespace TwitchBotBecauseIWantTo
             commands = commandList;
             sfxes = sfxList;
             requireMod = requireModBool;
-            ConnectionCredentials credentials = new ConnectionCredentials("TrashformerBot", "oauth:x64c6vsc9pfxnajwp16slxhusuiy9e");
+            if (Username == "")
+            {
+                Username = "TrashformerBot";
+            }
+            if (token == "")
+            {
+                token = "oauth:x64c6vsc9pfxnajwp16slxhusuiy9e";
+            }
+            ConnectionCredentials credentials = new ConnectionCredentials(Username, token);
 
             WebSocketClient customClient = new WebSocketClient();
             client = new TwitchClient(customClient);
