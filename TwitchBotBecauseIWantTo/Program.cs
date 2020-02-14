@@ -111,7 +111,7 @@ namespace TwitchBotBecauseIWantTo
                     string full = line.Split("$command:")[1];
                     string command = full.Split(',')[0].Replace(" ","");
                     string rsp = full.Split(',')[1];
-                    commands.Add(new command(command, rsp));
+                    commands.Add(new command(command.ToLower(), rsp));
                     numCommands++;
 
 
@@ -121,7 +121,7 @@ namespace TwitchBotBecauseIWantTo
                     string full = line.Split("$sfx:")[1];
                     string command = full.Split(',')[0].Replace(" ", "");
                     string rsp = full.Split(',')[1];
-                    SFX.Add(new sfx(command, rsp));
+                    SFX.Add(new sfx(command.ToLower(), rsp));
                     numSfx++;
                 }
                 if(line.Contains("$counter:"))
@@ -157,7 +157,7 @@ namespace TwitchBotBecauseIWantTo
                     if(CTs.Where(counter => counter.commandString == cmd).Count() <= 0)
                     {
                         counter ct = new counter();
-                        ct.commandString = cmd;
+                        ct.commandString = cmd.ToLower();
                         ct.textPartA = partA;
                         ct.textPartB = partB;
                         
@@ -175,7 +175,7 @@ namespace TwitchBotBecauseIWantTo
                         
 
                     }
-                    countCommands.Add(cmd);
+                    countCommands.Add(cmd.ToLower()); ;
                     
                     numCounters++;
                     
@@ -183,6 +183,14 @@ namespace TwitchBotBecauseIWantTo
                     
                 }
             }
+           /* foreach (counter ct in countersColection.FindAll())
+            {
+                if(ct.commandString.Any(char.IsUpper))
+                {
+                    ct.commandString = ct.commandString.ToLower();
+                    countersColection.Update(ct);
+                }
+            }*/
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(numCommands + " Commands Loaded");
             Console.WriteLine(numSfx + " SFX Loaded");
@@ -303,7 +311,7 @@ namespace TwitchBotBecauseIWantTo
             {
                 return;
             }
-            string message = e.ChatMessage.Message;
+            string message = e.ChatMessage.Message.ToLower();
             foreach (command cmd in commands)
             {
                 if(message.Contains(cmd.commandString))
@@ -313,26 +321,33 @@ namespace TwitchBotBecauseIWantTo
             }
             foreach (sfx sfx in sfxes)
             {
-                if (message.Contains(sfx.commandString))
+                if (message.ToLower().Contains(sfx.commandString))
                 {
                     sfx.play();
                 }
             }
             foreach(string ct in countersList)
             {
-                if (message.Contains(ct))
+                if (message.ToLower().Contains(ct.ToLower()))
                 {
                     List<counter> CTs = counters.FindAll().ToList();
-                    counter ctOBJ = CTs.Where(counter => message.Contains(counter.commandString)).FirstOrDefault();
+                    counter ctOBJ = CTs.Where(counter => message.Contains(counter.commandString.ToLower())).FirstOrDefault();
                     string count = ctOBJ.increment().ToString();
                     counters.Update(ctOBJ);
                     client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), ctOBJ.textPartA + " " + count  + " " + ctOBJ.textPartB);
                 }
             }
-            if (e.ChatMessage.Message.Contains("!dadJoke"))
+            if (e.ChatMessage.Message.ToLower().Contains("!stats"))
             {
+                string count = "";
 
-                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), "JOKE: ");
+                foreach (string ctCommand in countersList)
+                {
+                    List<counter> CTs = counters.FindAll().ToList();
+                    counter ctOBJ = CTs.Where(counter => ctCommand.Contains(counter.commandString.ToLower())).FirstOrDefault();
+                     count = count + ctOBJ.textPartA + " " + ctOBJ.count.ToString() + " " + ctOBJ.textPartB + "\r\n\r\n";
+                }
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), count );
             }
 
         }
