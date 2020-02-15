@@ -30,7 +30,7 @@ namespace TwitchBotBecauseIWantTo
         LiteEngine LiteEngine = new LiteEngine();
         static LiteDB.LiteDatabase db = new LiteDatabase(Directory.GetCurrentDirectory() + @"\counters.db");
         static LiteDB.ILiteCollection<counter> countersColection = db.GetCollection<counter>("counters");
-        static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = " };
+        static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = ",  "requireMod = "};
         static List<string> countCommands = new List<string>();
         public static List<command> commands = new List<command>();
         public static List<sfx> SFX = new List<sfx>();
@@ -306,7 +306,7 @@ namespace TwitchBotBecauseIWantTo
 
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
-            //Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
+            Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
             //client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.Channel).FirstOrDefault(), "Hey guys! I am a bot connected via TwitchLib!");
 
         }
@@ -322,7 +322,7 @@ namespace TwitchBotBecauseIWantTo
             string message = e.ChatMessage.Message.ToLower();
             foreach (command cmd in commands)
             {
-                if(message.Contains(cmd.commandString))
+                if(message.ToLower().Contains(cmd.commandString.ToLower()))
                 {
                     client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), cmd.response);
                 }
