@@ -1,0 +1,5 @@
+Channel Name = jmoforob
+Token = 
+Username = 
+requireMod = 
+$counter:  !RIP,This Man Has Died , Times Tonight!

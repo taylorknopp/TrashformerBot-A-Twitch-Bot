@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
@@ -21,7 +22,7 @@ using CSCore.Streams.Effects;
 using CSCore.CoreAudioAPI;
 using LiteDB.Engine;
 using LiteDB;
-
+using RestSharp;
 
 namespace TwitchBotBecauseIWantTo
 {
@@ -37,14 +38,25 @@ namespace TwitchBotBecauseIWantTo
         
         static void Main(string[] args)
         {
-            string settingsPath = Directory.GetCurrentDirectory() + @"\settings.txt";
+            bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            string settingsPath = "";
+
+            if (isWindows)
+            {
+                settingsPath = Directory.GetCurrentDirectory() + @"\settings.txt";
+            }
+            else
+            {
+                settingsPath = Directory.GetCurrentDirectory() + @"/settings.txt";
+            }
+            
 
             if (!File.Exists(settingsPath))
             {
                 
                 File.AppendAllLines(settingsPath, lines);
             }
-
+            Console.WriteLine(settingsPath);
             var settingsFile = File.ReadAllLines(settingsPath);
             var settingsList = new List<string>(settingsFile);
             string channel = null;
@@ -84,7 +96,7 @@ namespace TwitchBotBecauseIWantTo
             }
             catch
             {
-                token = "oauth:x64c6vsc9pfxnajwp16slxhusuiy9e";
+                token = "whh64pi7gjbmljju7z5mw1awmbx7cv";
             }
             try
             {
@@ -154,7 +166,7 @@ namespace TwitchBotBecauseIWantTo
                         Console.WriteLine("Malformed Counter In Config: " + cmd + " On Line: " + settingsList.IndexOf(line).ToString());
                         Console.ForegroundColor = ConsoleColor.White;
                     }
-                    if(CTs.Where(counter => counter.commandString == cmd).Count() <= 0)
+                    if(CTs.Where(counter => counter.commandString == cmd.ToLower()).Count() <= 0)
                     {
                         counter ct = new counter();
                         ct.commandString = cmd.ToLower();
@@ -165,7 +177,7 @@ namespace TwitchBotBecauseIWantTo
                     }
                     else
                     {
-                        counter ct = CTs.Where(counter => counter.commandString == cmd).FirstOrDefault();
+                        counter ct = CTs.Where(counter => counter.commandString == cmd.ToLower()).FirstOrDefault();
                         if(ct.textPartA != partA || ct.textPartB != partB)
                         {
                             ct.textPartA = partA;
@@ -307,7 +319,7 @@ namespace TwitchBotBecauseIWantTo
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
             Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
-            //client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.Channel).FirstOrDefault(), "Hey guys! I am a bot connected via TwitchLib!");
+            //client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.Channel).FirstOrDefault(), "Hey guys! I am a TrashformerBot!");
 
         }
 
@@ -357,7 +369,37 @@ namespace TwitchBotBecauseIWantTo
                 }
                 client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), count );
             }
-
+            if(e.ChatMessage.Message.ToLower().Contains("!quote"))
+            {
+                var restClient = new RestClient("https://rapidapi.p.rapidapi.com/ai-quotes/0");
+                var request = new RestRequest(Method.GET);
+                request.AddHeader("x-rapidapi-key", "5881a49a26mshe388135102c2cebp1a0796jsn99699e24584c");
+                request.AddHeader("x-rapidapi-host", "quoteai.p.rapidapi.com");
+                IRestResponse response = restClient.Execute(request);
+                List<string> quoteParts = response.Content.Replace("{", "").Split(",").ToList();
+                string quote = quoteParts[0].Remove(0, quoteParts[0].IndexOf(":")) + " -- " + quoteParts.Find(String => String.Contains("quote")).Remove(0, quoteParts.Find(String => String.Contains("quote")).IndexOf(":"));
+                quote = quote.Replace(":", "").Replace("\"","");
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), quote);
+            }
+            if(e.ChatMessage.Message.ToLower().Contains("!temp"))
+            {
+                string tempString = e.ChatMessage.Message.ToLower().Replace("!temp","").Replace(" ","");
+                if (tempString.Contains("c"))
+                {
+                    Int32 T = 0;
+                    Int32.TryParse(tempString.Replace("c", ""), out T);
+                    T = (int)((T * 1.8) + 32);
+                    
+                    client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), T + "F");
+                }
+                else
+                {
+                    Int32 T = 0;
+                    Int32.TryParse(tempString.Replace("f", ""), out T);
+                    T = (int)((T - 32) / 1.8);
+                    client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), T + "C");
+                }
+            }
         }
 
         private void Client_OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
@@ -368,10 +410,10 @@ namespace TwitchBotBecauseIWantTo
 
         private void Client_OnNewSubscriber(object sender, OnNewSubscriberArgs e)
         {
-            if (e.Subscriber.SubscriptionPlan == SubscriptionPlan.Prime)
-                client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points! So kind of you to use your Twitch Prime on this channel!");
-            else
-                client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points!");
+            if (e.Subscriber.SubscriptionPlan == SubscriptionPlan.Prime);
+            //client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points! So kind of you to use your Twitch Prime on this channel!");
+            //else
+                //client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points!");
         }
     }
     class command
@@ -447,5 +489,6 @@ namespace TwitchBotBecauseIWantTo
             
         }
     }
+    
 }
 
