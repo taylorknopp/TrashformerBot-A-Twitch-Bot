@@ -35,7 +35,7 @@ namespace TwitchBotBecauseIWantTo
         static List<string> countCommands = new List<string>();
         public static List<command> commands = new List<command>();
         public static List<sfx> SFX = new List<sfx>();
-        
+        public static bool quote = false;
         static void Main(string[] args)
         {
             bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
@@ -71,6 +71,16 @@ namespace TwitchBotBecauseIWantTo
             {
 
             }
+
+            try
+            {
+                bool.TryParse(settingsList[4].Split("=")[1], out quote);
+            }
+            catch
+            {
+
+            }
+
             try
             {
                 channel = settingsList[0].Split('=')[1].Replace(" ", "");
@@ -213,7 +223,7 @@ namespace TwitchBotBecauseIWantTo
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey();
 
-            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection,countCommands,requireMod);
+            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection,countCommands,requireMod,quote);
             while(true)
             {
                 Console.Clear();
@@ -273,13 +283,15 @@ namespace TwitchBotBecauseIWantTo
         public LiteDB.ILiteCollection<counter> counters;
         public List<string> countersList;
         public bool requireMod = true;
+        public bool quote = false;
          
-        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, List<string> ctList, bool requireModBool)
+        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, List<string> ctList, bool requireModBool, bool quoteBool)
         {
             countersList = ctList;
             counters = countersCol;
             commands = commandList;
             sfxes = sfxList;
+            quote = quoteBool;
             requireMod = requireModBool;
             if (Username == "")
             {
@@ -369,7 +381,7 @@ namespace TwitchBotBecauseIWantTo
                 }
                 client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), count );
             }
-            if(e.ChatMessage.Message.ToLower().Contains("!quote"))
+            if(e.ChatMessage.Message.ToLower().Contains("!quote") && quote)
             {
                 var restClient = new RestClient("https://rapidapi.p.rapidapi.com/ai-quotes/0");
                 var request = new RestRequest(Method.GET);
