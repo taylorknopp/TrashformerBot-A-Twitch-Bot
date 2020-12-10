@@ -31,7 +31,7 @@ namespace TwitchBotBecauseIWantTo
         LiteEngine LiteEngine = new LiteEngine();
         static LiteDB.LiteDatabase db = new LiteDatabase(Directory.GetCurrentDirectory() + @"\counters.db");
         static LiteDB.ILiteCollection<counter> countersColection = db.GetCollection<counter>("counters");
-        static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = ",  "requireMod = "};
+        static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = ",  "requireMod = ", "quote = "};
         static List<string> countCommands = new List<string>();
         public static List<command> commands = new List<command>();
         public static List<sfx> SFX = new List<sfx>();
