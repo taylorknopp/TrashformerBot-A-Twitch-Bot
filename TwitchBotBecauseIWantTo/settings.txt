@@ -1,6 +1,0 @@
-Channel Name = trash_productions
-Token = 
-Username = 
-requireMod = 
-quote = true
-$counter:  !RIP,This Man Has Died , Times Tonight!
