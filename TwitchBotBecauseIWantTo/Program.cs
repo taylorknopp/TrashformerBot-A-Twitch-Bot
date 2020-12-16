@@ -6,6 +6,8 @@ using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
+using TwitchLib.Communication;
+using TwitchLib.Communication.Events;
 using System.Net.WebSockets;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Interfaces;
@@ -313,6 +315,7 @@ namespace TwitchBotBecauseIWantTo
             //client.OnWhisperReceived += Client_OnWhisperReceived;
             //client.OnNewSubscriber += Client_OnNewSubscriber;
             client.OnConnected += Client_OnConnected;
+            client.OnDisconnected += Client_OnDisconnected;
 
 
             client.Connect();
@@ -328,6 +331,10 @@ namespace TwitchBotBecauseIWantTo
             //Console.WriteLine($"Connected to {e.AutoJoinChannel}");
         }
 
+        private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
+        {
+            Console.WriteLine("DISCONECTED!!!");
+        }
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
             Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
