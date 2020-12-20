@@ -14,6 +14,7 @@ using TwitchLib.Communication.Interfaces;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using System.Runtime;
 using CSCore;
 using CSCore.Codecs;
 using CSCore.DSP;
@@ -33,11 +34,19 @@ namespace TwitchBotBecauseIWantTo
         LiteEngine LiteEngine = new LiteEngine();
         static LiteDB.LiteDatabase db = new LiteDatabase(Directory.GetCurrentDirectory() + @"\counters.db");
         static LiteDB.ILiteCollection<counter> countersColection = db.GetCollection<counter>("counters");
+        static LiteDB.ILiteCollection<swearJarAcc> sjAccClection = db.GetCollection<swearJarAcc>("sjAccClection");
         static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = ",  "requireMod = ", "quote = "};
         static List<string> countCommands = new List<string>();
         public static List<command> commands = new List<command>();
         public static List<sfx> SFX = new List<sfx>();
         public static bool quote = false;
+        public static bool pretty = false;
+        public static bool dice = false;
+        public static bool coin = false;
+        public static int prettyVal = 100;
+        public static bool swearJar = false;
+        public static float denom = 1.00F; 
+        
         static void Main(string[] args)
         {
             bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
@@ -77,6 +86,54 @@ namespace TwitchBotBecauseIWantTo
             try
             {
                 bool.TryParse(settingsList[4].Split("=")[1], out quote);
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                bool.TryParse(settingsList[5].Split("=")[1], out pretty);
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                Int32.TryParse(settingsList[6].Split("=")[1], out prettyVal);
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                bool.TryParse(settingsList[7].Split("=")[1], out dice);
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                bool.TryParse(settingsList[8].Split("=")[1], out coin);
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                bool.TryParse(settingsList[9].Split("=")[1], out swearJar);
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                float.TryParse(settingsList[10].Split("=")[1], out denom);
             }
             catch
             {
@@ -225,7 +282,7 @@ namespace TwitchBotBecauseIWantTo
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey();
 
-            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection,countCommands,requireMod,quote);
+            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection, sjAccClection, countCommands,requireMod,quote,pretty,coin,dice,prettyVal,swearJar,denom);
             while(true)
             {
                 Console.Clear();
@@ -283,18 +340,34 @@ namespace TwitchBotBecauseIWantTo
         public List<command> commands;
         public List<sfx> sfxes;
         public LiteDB.ILiteCollection<counter> counters;
+        public LiteDB.ILiteCollection<swearJarAcc> accounts;
         public List<string> countersList;
         public bool requireMod = true;
         public bool quote = false;
-         
-        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, List<string> ctList, bool requireModBool, bool quoteBool)
+        public bool pretty = false;
+        public bool dice = false;
+        public bool coin = false;
+        public int pretyIntVal = 100;
+        public bool swearJar = false;
+        public float denomination = 1.00F;
+
+        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, LiteDB.ILiteCollection<swearJarAcc> accountsColl, List<string> ctList, bool requireModBool, bool quoteBool, bool isPrettyBool, bool coinBool, bool diceBool,int pretyInt,bool sjBool,float sjDenom)
         {
+            
             countersList = ctList;
             counters = countersCol;
             commands = commandList;
             sfxes = sfxList;
             quote = quoteBool;
             requireMod = requireModBool;
+            pretty = isPrettyBool;
+            dice = diceBool;
+            coin = coinBool;
+            swearJar = sjBool;
+            pretyIntVal = pretyInt;
+            accounts = accountsColl;
+
+            denomination = sjDenom;
             if (Username == "")
             {
                 Username = "TrashformerBot";
@@ -344,9 +417,21 @@ namespace TwitchBotBecauseIWantTo
 
         private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
+            Random rand = new Random();
             bool isMod = e.ChatMessage.IsModerator || e.ChatMessage.IsBroadcaster;
             bool continueOrStopBecasueNotMod = !requireMod || (requireMod && isMod);
-            if(!continueOrStopBecasueNotMod)
+            if(pretty)
+            {
+                if (rand.Next(0, pretyIntVal) == pretyIntVal - 1)
+                {
+                    client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), e.ChatMessage.Username + " you so pretty!");
+                }
+            }
+            
+
+
+
+            if (!continueOrStopBecasueNotMod)
             {
                 return;
             }
@@ -419,6 +504,68 @@ namespace TwitchBotBecauseIWantTo
                     client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), T + "C");
                 }
             }
+            if(e.ChatMessage.Message.ToLower().Contains("!roll") && dice)
+            {
+                
+                int result = rand.Next(1, 7);
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), result.ToString());
+            }
+            if (e.ChatMessage.Message.ToLower().Contains("!flip") && coin)
+            {
+                
+                string[] msg = new string[] { "Heads", "Tails" };
+                int result = rand.Next(0, 2);
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), msg[result]);
+            }
+            if (message.ToLower().Contains("!sj") && !message.ToLower().Contains("!sjreset") && swearJar)
+            {
+                List<swearJarAcc> accountsList = accounts.FindAll().ToList();
+                string userNameToFind = e.ChatMessage.Message.Remove(0,3).Replace(" ","");
+                swearJarAcc acc = accountsList.Where(swearJarAcc => swearJarAcc.useranme == userNameToFind).FirstOrDefault();
+                string owings = "";
+                if (acc == null)
+                {
+                    acc = new swearJarAcc();
+                    acc.useranme = userNameToFind;
+                    acc.owings = 0;
+                    owings = acc.increment(denomination).ToString();
+                    accounts.Insert(acc);
+                }
+                else
+                {
+                    owings = acc.increment(denomination).ToString();
+                    accounts.Update(acc);
+                }
+
+
+
+                
+                
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), userNameToFind + " ows " + owings + "$ to the swear jar!");
+            }
+            if (message.ToLower().Contains("!sjreset") && swearJar)
+            {
+                List<swearJarAcc> accountsList = accounts.FindAll().ToList();
+                string userNameToFind = e.ChatMessage.Message.Remove(0, 8).Replace(" ", "");
+                swearJarAcc acc = accountsList.Where(swearJarAcc => swearJarAcc.useranme == userNameToFind).FirstOrDefault();
+                
+                if (acc == null)
+                {
+                    return;
+                }
+                else
+                {
+                    acc.reset();
+                    accounts.Update(acc);
+                }
+
+
+
+
+
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), userNameToFind + " ows nothing now!");
+            }
+
         }
 
         private void Client_OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
@@ -426,6 +573,7 @@ namespace TwitchBotBecauseIWantTo
             if (e.WhisperMessage.Username == "my_friend")
                 client.SendWhisper(e.WhisperMessage.Username, "Hey! Whispers are so cool!!");
         }
+
 
         private void Client_OnNewSubscriber(object sender, OnNewSubscriberArgs e)
         {
@@ -508,6 +656,27 @@ namespace TwitchBotBecauseIWantTo
             
         }
     }
-    
+
+    class swearJarAcc
+    {
+        public int _id { get; set; }
+        public float owings { get; set; }
+        public string useranme { get; set; } 
+        public void reset()
+        {
+            this.owings = 0F;
+        }
+
+
+        public float increment(float denomination)
+        {
+
+            this.owings += denomination;
+
+            return this.owings;
+
+        }
+    }
+
 }
 
