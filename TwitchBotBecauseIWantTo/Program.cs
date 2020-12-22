@@ -517,7 +517,7 @@ namespace TwitchBotBecauseIWantTo
                 int result = rand.Next(0, 2);
                 client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), msg[result]);
             }
-            if (message.ToLower().Contains("!sj") && !message.ToLower().Contains("!sjreset") && swearJar)
+            if (message.ToLower().Contains("!sj") && !message.ToLower().Contains("!sjreset") && swearJar && message.ToLower().Length > 3)
             {
                 List<swearJarAcc> accountsList = accounts.FindAll().ToList();
                 string userNameToFind = e.ChatMessage.Message.Remove(0,3).Replace(" ","");
@@ -543,11 +543,32 @@ namespace TwitchBotBecauseIWantTo
                 
                 client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), userNameToFind + " ows " + owings + "$ to the swear jar!");
             }
-            if (message.ToLower().Contains("!sjreset") && swearJar)
+            if(message.ToLower().Contains("!sj") && !message.ToLower().Contains("!sjreset") && swearJar && message.ToLower().Length <= 3)
+            {
+                List<swearJarAcc> accList = accounts.FindAll().OrderBy(swearJarAcc => swearJarAcc.owings).ToList();
+                accList.Reverse();
+                string msg = "";
+                if(accList.Count > 10)
+                {
+                    for (int i = 0; i <= 9; i++)
+                    {
+                        msg += i.ToString() + ". " + accList[i].useranme + ": " + accList[i].owings + Environment.NewLine;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i <= accList.Count() - 1; i++)
+                    {
+                        msg += i.ToString() + ". " + accList[i].useranme + ": " + accList[i].owings + Environment.NewLine;
+                    }
+                }
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), msg);
+            }
+            if (message.ToLower().Contains("!sjreset") && swearJar && isMod)
             {
                 List<swearJarAcc> accountsList = accounts.FindAll().ToList();
-                string userNameToFind = e.ChatMessage.Message.Remove(0, 8).Replace(" ", "");
-                swearJarAcc acc = accountsList.Where(swearJarAcc => swearJarAcc.useranme == userNameToFind).FirstOrDefault();
+                string userNameToFind = e.ChatMessage.Message.Remove(0, 8).Replace(" ", "").Replace("@","");
+                swearJarAcc acc = accountsList.Where(swearJarAcc => swearJarAcc.useranme.Replace("@","") == userNameToFind).FirstOrDefault();
                 
                 if (acc == null)
                 {
