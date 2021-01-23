@@ -407,6 +407,19 @@ namespace TwitchBotBecauseIWantTo
         private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
         {
             Console.WriteLine("DISCONECTED!!!");
+            while(!client.IsConnected)
+            {
+                try
+                {
+                    client.Connect();
+                    Console.WriteLine("Conected Again! " + DateTime.Now);
+                }
+                catch
+                {
+                    Console.WriteLine("Connect fail: " + DateTime.Now);
+                }
+                
+            }
         }
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
