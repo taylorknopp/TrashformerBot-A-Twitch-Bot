@@ -292,10 +292,10 @@ namespace TwitchBotBecauseIWantTo
             Console.WriteLine(numSfx + " SFX Loaded");
             Console.WriteLine(numCounters + " Counters Loaded");
             Console.WriteLine("Commands Require Moderator Status Is Set To: " + requireMod);
-            Console.WriteLine("--Press Any Key To Continue--");
+            //Console.WriteLine("--Press Any Key To Continue--");
 
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.ReadKey();
+            Thread.Sleep(2500);
 
             Bot bot = new Bot(channel,token,username,commands, SFX, countersColection, sjAccClection, countCommands,requireMod,quote,pretty,coin,dice,prettyVal,swearJar,denom,dad);
             while(true)
