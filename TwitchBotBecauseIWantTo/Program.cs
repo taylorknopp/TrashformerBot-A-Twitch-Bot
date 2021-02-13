@@ -406,6 +406,7 @@ namespace TwitchBotBecauseIWantTo
             //client.OnNewSubscriber += Client_OnNewSubscriber;
             client.OnConnected += Client_OnConnected;
             client.OnDisconnected += Client_OnDisconnected;
+            client.OnConnectionError += onConnectionError;
 
 
             client.Connect();
@@ -420,12 +421,12 @@ namespace TwitchBotBecauseIWantTo
         {
             //Console.WriteLine($"Connected to {e.AutoJoinChannel}");
         }
-
-        private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
+        private void onConnectionError(object sender, OnConnectionErrorArgs e)
         {
-            Console.WriteLine("DISCONECTED!!!");
-            while(!client.IsConnected)
+            Console.WriteLine("Connection Error!!!");
+            while (!client.IsConnected)
             {
+                Thread.Sleep(5000);
                 try
                 {
                     client.Connect();
@@ -435,8 +436,12 @@ namespace TwitchBotBecauseIWantTo
                 {
                     Console.WriteLine("Connect fail: " + DateTime.Now);
                 }
-                
+
             }
+        }
+        private void Client_OnDisconnected(object sender, OnDisconnectedEventArgs e)
+        {
+            Environment.Exit(0);
         }
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
