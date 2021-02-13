@@ -26,6 +26,7 @@ using CSCore.CoreAudioAPI;
 using LiteDB.Engine;
 using LiteDB;
 using RestSharp;
+using ICanHazDadJoke.NET;
 
 namespace TwitchBotBecauseIWantTo
 {
@@ -35,7 +36,7 @@ namespace TwitchBotBecauseIWantTo
         static LiteDB.LiteDatabase db = new LiteDatabase(Directory.GetCurrentDirectory() + @"\counters.db");
         static LiteDB.ILiteCollection<counter> countersColection = db.GetCollection<counter>("counters");
         static LiteDB.ILiteCollection<swearJarAcc> sjAccClection = db.GetCollection<swearJarAcc>("sjAccClection");
-        static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = ",  "requireMod = ", "quote = "};
+        static List<string> lines = new List<string>() { "Channel Name = ", "Token = ", "Username = ",  "requireMod = ", "quote = " ,"pretty = ","prettyVal = ","dice = ","coin = ","swearJar = ","swearJarDonmination = "};
         static List<string> countCommands = new List<string>();
         public static List<command> commands = new List<command>();
         public static List<sfx> SFX = new List<sfx>();
@@ -45,6 +46,7 @@ namespace TwitchBotBecauseIWantTo
         public static bool coin = false;
         public static int prettyVal = 100;
         public static bool swearJar = false;
+        public static bool dad = false;
         public static float denom = 1.00F; 
         
         static void Main(string[] args)
@@ -133,12 +135,21 @@ namespace TwitchBotBecauseIWantTo
             }
             try
             {
+                bool.TryParse(settingsList[11].Split("=")[1], out dad);
+            }
+            catch
+            {
+
+            }
+            try
+            {
                 float.TryParse(settingsList[10].Split("=")[1], out denom);
             }
             catch
             {
 
             }
+
 
             try
             {
@@ -263,6 +274,10 @@ namespace TwitchBotBecauseIWantTo
                    
                     
                 }
+                if(line.Contains("$prg"))
+                {
+                    List<string> parts = line.Split("$prg:")[1].Split(",").ToList();
+                }
             }
            /* foreach (counter ct in countersColection.FindAll())
             {
@@ -282,7 +297,7 @@ namespace TwitchBotBecauseIWantTo
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey();
 
-            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection, sjAccClection, countCommands,requireMod,quote,pretty,coin,dice,prettyVal,swearJar,denom);
+            Bot bot = new Bot(channel,token,username,commands, SFX, countersColection, sjAccClection, countCommands,requireMod,quote,pretty,coin,dice,prettyVal,swearJar,denom,dad);
             while(true)
             {
                 Console.Clear();
@@ -350,8 +365,9 @@ namespace TwitchBotBecauseIWantTo
         public int pretyIntVal = 100;
         public bool swearJar = false;
         public float denomination = 1.00F;
+        public bool dadBool = false;
 
-        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, LiteDB.ILiteCollection<swearJarAcc> accountsColl, List<string> ctList, bool requireModBool, bool quoteBool, bool isPrettyBool, bool coinBool, bool diceBool,int pretyInt,bool sjBool,float sjDenom)
+        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, LiteDB.ILiteCollection<swearJarAcc> accountsColl, List<string> ctList, bool requireModBool, bool quoteBool, bool isPrettyBool, bool coinBool, bool diceBool,int pretyInt,bool sjBool,float sjDenom, bool dadJ)
         {
             
             countersList = ctList;
@@ -366,6 +382,7 @@ namespace TwitchBotBecauseIWantTo
             swearJar = sjBool;
             pretyIntVal = pretyInt;
             accounts = accountsColl;
+            dadBool = dadJ;
 
             denomination = sjDenom;
             if (Username == "")
@@ -428,7 +445,7 @@ namespace TwitchBotBecauseIWantTo
 
         }
 
-        private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
+        private async void  Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
             Random rand = new Random();
             bool isMod = e.ChatMessage.IsModerator || e.ChatMessage.IsBroadcaster;
@@ -529,6 +546,15 @@ namespace TwitchBotBecauseIWantTo
                 string[] msg = new string[] { "Heads", "Tails" };
                 int result = rand.Next(0, 2);
                 client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), msg[result]);
+            }
+            if(message.ToLower() == "!dad" && dadBool)
+            {
+                var libraryName = "ICanHazDadJoke.NET Workbook";
+                var contactUri = "https://github.com/mattleibow/ICanHazDadJoke.NET";
+                var dadClient = new DadJokeClient(libraryName, contactUri);
+                string joke = await dadClient.GetRandomJokeStringAsync();
+                client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), joke);
+
             }
             if (message.ToLower().Contains("!sj") && !message.ToLower().Contains("!sjreset") && swearJar && message.ToLower().Length > 3)
             {
@@ -668,6 +694,13 @@ namespace TwitchBotBecauseIWantTo
         }
        
 
+
+    }
+    class prgm
+    {
+        public string path { get; set; }
+        public string command { get; set; }
+        public string name { get; set; }
 
     }
     class counter
