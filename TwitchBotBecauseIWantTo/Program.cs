@@ -367,9 +367,9 @@ namespace TwitchBotBecauseIWantTo
         public float denomination = 1.00F;
         public bool dadBool = false;
 
-        public Bot(string channel,string token,string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, LiteDB.ILiteCollection<swearJarAcc> accountsColl, List<string> ctList, bool requireModBool, bool quoteBool, bool isPrettyBool, bool coinBool, bool diceBool,int pretyInt,bool sjBool,float sjDenom, bool dadJ)
+        public Bot(string channel, string token, string Username, List<command> commandList, List<sfx> sfxList, LiteDB.ILiteCollection<counter> countersCol, LiteDB.ILiteCollection<swearJarAcc> accountsColl, List<string> ctList, bool requireModBool, bool quoteBool, bool isPrettyBool, bool coinBool, bool diceBool, int pretyInt, bool sjBool, float sjDenom, bool dadJ)
         {
-            
+
             countersList = ctList;
             counters = countersCol;
             commands = commandList;
@@ -382,7 +382,8 @@ namespace TwitchBotBecauseIWantTo
             swearJar = sjBool;
             pretyIntVal = pretyInt;
             accounts = accountsColl;
-            dadBool = dadJ;
+            dadBool = dadJ; 
+            
 
             denomination = sjDenom;
             if (Username == "")
@@ -455,11 +456,13 @@ namespace TwitchBotBecauseIWantTo
             Random rand = new Random();
             bool isMod = e.ChatMessage.IsModerator || e.ChatMessage.IsBroadcaster;
             bool continueOrStopBecasueNotMod = !requireMod || (requireMod && isMod);
-            if(pretty)
+            string[] prettyStrings = new string[] { "I believe in you (name).", "You are valid (name), and I see you.", "Hey (name), I appreciate you.", "You are superior to negative thoughts and low actions (name)", "(name) is bold and courageous.", "You are highly valued (name)!", "If opportunity doesn't knock, build a door (name).", "Wherever you go, no matter what the weather, (name) is always bringing the sunshine!", "(name) you are in charge of your own happiness." };
+            if (pretty)
             {
                 if (rand.Next(0, pretyIntVal) == pretyIntVal - 1)
                 {
-                    client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), e.ChatMessage.Username + " you so pretty!");
+                    string toSend = prettyStrings[rand.Next(0, prettyStrings.Count() - 1)].Replace("(name)", e.ChatMessage.Username);
+                    client.SendMessage(client.JoinedChannels.Where(JoinedChannel => JoinedChannel.Channel == e.ChatMessage.Channel).FirstOrDefault(), toSend);
                 }
             }
             
