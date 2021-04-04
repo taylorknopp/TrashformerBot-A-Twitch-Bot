@@ -41,21 +41,21 @@ Default Config and Default Features:
 
 ## Example Configuration
 
-Channel Name = <Channel Name>
-Token =
-Username =
-requireMod = false
-quote = false
-pretty = true
-prettyVal = 1000
-dice = true
-coin = true
-swearJar = true
-swearJarDonmination = 0.1
-dad = true
-$command: !twit,<link to your twitter here>
-$sfx: !bong,<Path to your audio file, .wav preferably>
-$counter:  !count,<Text to come before the number>,<Text to come after the number>
+    Channel Name = <Channel Name>
+    Token =
+    Username =
+    requireMod = false
+    quote = false
+    pretty = true
+    prettyVal = 1000
+    dice = true
+    coin = true
+    swearJar = true
+    swearJarDonmination = 0.1
+    dad = true
+    $command: !twit,<link to your twitter here>
+    $sfx: !bong,<Path to your audio file, .wav preferably>
+    $counter:  !count,<Text to come before the number>,<Text to come after the number>
     
 ## Default Account
    The default account the bot will use is TrashformerBot on Twitch
